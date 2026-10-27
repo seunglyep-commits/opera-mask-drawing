@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>역사 속 인물 및 주변 인물 얼굴 분장 디지털 드로잉</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Pretendard / Gowun Dodum / Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans KR"', 'sans-serif'],
+            display: ['"Gowun Dodum"', '"Noto Sans KR"', 'sans-serif'],
+          },
+          colors: {
+            pastel: {
+              bg: '#FFF8F1',
+              card: '#FFFFFF',
+              accent: '#FFEDD5',
+              border: '#F3E5D8',
+              primary: '#EA580C',
+              secondary: '#FEF3C7'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FFF8F1;
+      background-image: 
+        radial-gradient(at 10% 10%, #FFE4E6 0px, transparent 40%),
+        radial-gradient(at 90% 15%, #FEF3C7 0px, transparent 40%),
+        radial-gradient(at 50% 90%, #E0E7FF 0px, transparent 45%);
+      background-attachment: fixed;
+      overscroll-behavior: none;
+    }
+    /* Custom Range Slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      background: #FDE68A;
+      height: 0.6rem;
+      border-radius: 9999px;
+      border: 1px solid #FCD34D;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -5px;
+      background-color: #EA580C;
+      height: 1.25rem;
+      width: 1.25rem;
+      border-radius: 9999px;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: transform 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    .canvas-wrapper {
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .color-card-active {
+      ring-width: 4px;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.18), 0 4px 6px -2px rgba(234, 88, 12, 0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col justify-between">
+
+  <!-- 상단 헤더 영역 -->
+  <header class="w-full pt-5 pb-3 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto bg-white/90 backdrop-blur-md border-2 border-amber-200/80 rounded-3xl px-6 py-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500 via-amber-500 to-emerald-500 p-0.5 shadow-md flex items-center justify-center shrink-0">
+          <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center text-2xl" aria-hidden="true">
+            🎭
+          </div>
+        </div>
+        <div>
+          <span class="inline-block text-xs font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200 mb-1">
+            초·중학교 미술 디지털 창작 실습
+          </span>
+          <h1 class="text-xl sm:text-2xl md:text-3xl font-black text-slate-800 tracking-tight">
+            역사 속 인물 및 주변 인물 얼굴 분장 디지털 드로잉
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs sm:text-sm bg-amber-50/90 border border-amber-200 px-3.5 py-2 rounded-2xl text-amber-900 font-medium">
+        <span class="text-base">💡</span>
+        <span>인물의 성격을 나타내는 <strong>경극/변검 색채 상징</strong>을 골라 가면을 색칠해 보세요!</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 영역 (좌우 2단 레이아웃) -->
+  <main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-3">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- 왼쪽: 도구 및 안내 패널 (5 cols) -->
+      <section class="lg:col-span-5 flex flex-col gap-5">
+
+        <!-- 1. 색상별 성격 안내 카드 -->
+        <div class="bg-white/95 backdrop-blur rounded-3xl p-5 border-2 border-rose-100 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-lg font-extrabold text-slate-800 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm">1</span>
+              색상별 성격 안내 카드
+            </h2>
+            <span class="text-xs font-semibold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+              카드를 누르면 브러시 색상이 바뀌어요!
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 gap-2.5" id="colorCardsContainer" role="radiogroup" aria-label="경극 분장 색상 선택">
+            <!-- 빨강 -->
+            <button type="button" data-color="#E11D48" data-name="빨강 (충성·용맹)"
+              class="color-card group w-full text-left p-3 rounded-2xl border-2 border-rose-200 bg-rose-50/60 hover:bg-rose-100/70 transition-all flex items-center justify-between gap-3 ring-rose-500 color-card-active">
+              <div class="flex items-center gap-3.5">
+                <span class="w-10 h-10 rounded-xl bg-[#E11D48] shadow-inner border-2 border-white flex items-center justify-center shrink-0">
+                  <span class="w-3 h-3 rounded-full bg-white/40"></span>
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-base text-rose-900">빨강</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-rose-200/80 text-rose-900 font-bold">Red</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-700 font-medium mt-0.5">충성스럽고 용맹함</p>
+                </div>
+              </div>
+              <span class="select-badge text-xs font-bold px-3 py-1.5 rounded-xl bg-rose-600 text-white shadow-sm shrink-0">
+                선택됨 ✓
+              </span>
+            </button>
+
+            <!-- 검정 -->
+            <button type="button" data-color="#1E293B" data-name="검정 (정직·지혜)"
+              class="color-card group w-full text-left p-3 rounded-2xl border-2 border-slate-200 bg-slate-50/70 hover:bg-slate-100 transition-all flex items-center justify-between gap-3 ring-slate-700">
+              <div class="flex items-center gap-3.5">
+                <span class="w-10 h-10 rounded-xl bg-[#1E293B] shadow-inner border-2 border-white flex items-center justify-center shrink-0">
+                  <span class="w-3 h-3 rounded-full bg-white/30"></span>
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-base text-slate-900">검정</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-800 font-bold">Black</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-700 font-medium mt-0.5">정직하고 지혜로움</p>
+                </div>
+              </div>
+              <span class="select-badge text-xs font-bold px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-300 group-hover:bg-slate-800 group-hover:text-white transition-colors shrink-0">
+                브러시 선택
+              </span>
+            </button>
+
+            <!-- 노랑 -->
+            <button type="button" data-color="#FACC15" data-name="노랑 (거침·사나움)"
+              class="color-card group w-full text-left p-3 rounded-2xl border-2 border-amber-200 bg-amber-50/60 hover:bg-amber-100/70 transition-all flex items-center justify-between gap-3 ring-amber-500">
+              <div class="flex items-center gap-3.5">
+                <span class="w-10 h-10 rounded-xl bg-[#FACC15] shadow-inner border-2 border-white flex items-center justify-center shrink-0">
+                  <span class="w-3 h-3 rounded-full bg-white/60"></span>
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-base text-amber-900">노랑</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-amber-200/80 text-amber-900 font-bold">Yellow</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-700 font-medium mt-0.5">거칠고 성격이 사나움</p>
+                </div>
+              </div>
+              <span class="select-badge text-xs font-bold px-3 py-1.5 rounded-xl bg-white text-amber-900 border border-amber-300 group-hover:bg-amber-500 group-hover:text-white transition-colors shrink-0">
+                브러시 선택
+              </span>
+            </button>
+
+            <!-- 초록 -->
+            <button type="button" data-color="#16A34A" data-name="초록 (급함·용감함)"
+              class="color-card group w-full text-left p-3 rounded-2xl border-2 border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100/70 transition-all flex items-center justify-between gap-3 ring-emerald-500">
+              <div class="flex items-center gap-3.5">
+                <span class="w-10 h-10 rounded-xl bg-[#16A34A] shadow-inner border-2 border-white flex items-center justify-center shrink-0">
+                  <span class="w-3 h-3 rounded-full bg-white/40"></span>
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-base text-emerald-900">초록</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-200/80 text-emerald-900 font-bold">Green</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-700 font-medium mt-0.5">성격이 급하고 용감함</p>
+                </div>
+              </div>
+              <span class="select-badge text-xs font-bold px-3 py-1.5 rounded-xl bg-white text-emerald-900 border border-emerald-300 group-hover:bg-emerald-600 group-hover:text-white transition-colors shrink-0">
+                브러시 선택
+              </span>
+            </button>
+
+            <!-- 하양 -->
+            <button type="button" data-color="#FFFFFF" data-name="하양 (간사·음흉함)"
+              class="color-card group w-full text-left p-3 rounded-2xl border-2 border-indigo-100 bg-indigo-50/40 hover:bg-indigo-50 transition-all flex items-center justify-between gap-3 ring-indigo-400">
+              <div class="flex items-center gap-3.5">
+                <span class="w-10 h-10 rounded-xl bg-white shadow-sm border-2 border-slate-300 flex items-center justify-center shrink-0">
+                  <span class="w-3 h-3 rounded-full bg-slate-200"></span>
+                </span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-extrabold text-base text-slate-800">하양</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-bold">White</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-700 font-medium mt-0.5">간사하고 음흉함</p>
+                </div>
+              </div>
+              <span class="select-badge text-xs font-bold px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-300 group-hover:bg-indigo-500 group-hover:text-white transition-colors shrink-0">
+                브러시 선택
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. 그리기 도구 패널 -->
+        <div class="bg-white/95 backdrop-blur rounded-3xl p-5 border-2 border-amber-100 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-lg font-extrabold text-slate-800 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm">2</span>
+              그리기 도구
+            </h2>
+            <div id="currentToolStatus" class="flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900">
+              <span id="statusColorDot" class="w-3.5 h-3.5 rounded-full bg-[#E11D48] border border-slate-300 inline-block"></span>
+              <span id="statusToolText">빨강 (충성·용맹) 브러시</span>
+            </div>
+          </div>
+
+          <!-- 브러시 크기 슬라이더 -->
+          <div class="bg-amber-50/60 rounded-2xl p-3.5 border border-amber-100 mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <label for="brushSizeSlider" class="text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                <span>🖌️ 브러시 굵기 조절</span>
+              </label>
+              <div class="flex items-center gap-2">
+                <span id="brushPreviewCircle" class="inline-block rounded-full bg-[#E11D48] border border-slate-300 transition-all" style="width: 18px; height: 18px;"></span>
+                <span id="brushSizeValue" class="text-sm font-extrabold text-orange-600 min-w-[42px] text-right">18 px</span>
+              </div>
+            </div>
+            <input id="brushSizeSlider" type="range" min="4" max="50" value="18" class="w-full" />
+            <div class="flex justify-between text-[11px] text-slate-400 font-medium mt-1 px-1">
+              <span>세밀한 선 (4px)</span>
+              <span>중간 (24px)</span>
+              <span>넓은 면 채우기 (50px)</span>
+            </div>
+          </div>
+
+          <!-- 도구 버튼들: 실행 취소 / 지우개 / 전체 지우기 -->
+          <div class="grid grid-cols-3 gap-2.5">
+            <button type="button" id="undoBtn"
+              class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-2xl font-bold text-xs sm:text-sm border-2 border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 active:scale-95 transition-all">
+              <span>↩️</span>
+              <span>한 단계 취소</span>
+            </button>
+
+            <button type="button" id="eraserBtn"
+              class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-2xl font-bold text-xs sm:text-sm border-2 border-sky-200 bg-sky-50 text-sky-800 hover:bg-sky-100 active:scale-95 transition-all">
+              <span>🧼</span>
+              <span>지우개</span>
+            </button>
+
+            <button type="button" id="clearBtn"
+              class="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-2xl font-bold text-xs sm:text-sm border-2 border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 active:scale-95 transition-all">
+              <span>🗑️</span>
+              <span>전체 지우기</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. 인물 설정 입력폼 -->
+        <div class="bg-white/95 backdrop-blur rounded-3xl p-5 border-2 border-indigo-100 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-lg font-extrabold text-slate-800 flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm">3</span>
+              인물 설정 및 표현 의도
+            </h2>
+            <span class="text-xs text-indigo-600 font-semibold">작품 저장 시 하단에 함께 기록돼요</span>
+          </div>
+
+          <div class="space-y-3.5">
+            <div>
+              <label for="characterNameInput" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+                👤 표현할 인물 이름
+              </label>
+              <input id="characterNameInput" type="text" maxlength="40"
+                placeholder="예: 이순신"
+                class="w-full px-4 py-2.5 rounded-2xl border-2 border-indigo-100 bg-indigo-50/30 focus:bg-white focus:border-indigo-400 focus:outline-none text-sm font-semibold text-slate-800 placeholder:text-slate-400 transition-colors" />
+            </div>
+
+            <div>
+              <label for="expressionIntentInput" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+                📝 표현 의도 작성
+              </label>
+              <textarea id="expressionIntentInput" rows="3" maxlength="200"
+                placeholder="예: 왜군과 맞서 싸운 이순신 장군의 용맹함을 붉은색으로 표현함"
+                class="w-full px-4 py-2.5 rounded-2xl border-2 border-indigo-100 bg-indigo-50/30 focus:bg-white focus:border-indigo-400 focus:outline-none text-sm font-medium text-slate-800 placeholder:text-slate-400 transition-colors resize-none"></textarea>
+            </div>
+
+            <!-- 예시 빠른 입력 칩 -->
+            <div class="pt-1">
+              <span class="text-[11px] font-bold text-slate-400 block mb-1.5">✨ 예시 눌러서 참고하기:</span>
+              <div class="flex flex-wrap gap-1.5">
+                <button type="button" class="example-chip text-xs bg-slate-100 hover:bg-amber-100 text-slate-700 px-2.5 py-1 rounded-full transition-colors font-medium"
+                  data-name="이순신 장군" data-intent="왜군과 맞서 싸운 이순신 장군의 충성심과 용맹함을 붉은색과 검은색 선으로 강조하여 표현함.">
+                  #이순신 장군 (빨강)
+                </button>
+                <button type="button" class="example-chip text-xs bg-slate-100 hover:bg-amber-100 text-slate-700 px-2.5 py-1 rounded-full transition-colors font-medium"
+                  data-name="세종대왕" data-intent="백성을 사랑하고 지혜롭게 훈민정음을 창제한 세종대왕의 정직함과 지혜로움을 검은색과 붉은색으로 표현함.">
+                  #세종대왕 (검정)
+                </button>
+                <button type="button" class="example-chip text-xs bg-slate-100 hover:bg-amber-100 text-slate-700 px-2.5 py-1 rounded-full transition-colors font-medium"
+                  data-name="우리 반 체육부장" data-intent="항상 앞장서서씩씩하게 달리고 친구들을 돕는 용감하고 활발한 성격을 초록색과 노란색 무늬로 표현함.">
+                  #주변 인물 (초록)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 오른쪽: 캔버스 영역 (7 cols) -->
+      <section class="lg:col-span-7 flex flex-col gap-4">
+        <div class="bg-white/95 backdrop-blur rounded-3xl p-4 sm:p-6 border-2 border-amber-200/90 shadow-md flex flex-col items-center">
+
+          <!-- 캔버스 상단 안내 바 -->
+          <div class="w-full flex flex-wrap items-center justify-between gap-2 mb-3 px-1">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-400"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <span class="text-sm font-extrabold text-slate-700 ml-1">얼굴 분장 드로잉 보드</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <label class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 cursor-pointer select-none bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors">
+                <input type="checkbox" id="symmetryToggle" class="rounded text-orange-600 focus:ring-0 w-3.5 h-3.5" />
+                <span>🦋 좌우 대칭 그리기</span>
+              </label>
+              <label class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 cursor-pointer select-none bg-slate-100 px-3 py-1.5 rounded-full hover:bg-slate-200 transition-colors">
+                <input type="checkbox" id="guideOnTopToggle" checked class="rounded text-orange-600 focus:ring-0 w-3.5 h-3.5" />
+                <span>👁️ 얼굴 윤곽선 항상 보이기</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 캔버스 컨테이너 (그리기 레이어 + 가이드 레이어 통합 표시) -->
+          <div class="canvas-wrapper relative w-full max-w-[560px] aspect-[5/6] rounded-2xl overflow-hidden border-2 border-amber-200 shadow-inner bg-[#FDFBF7]">
+            <canvas id="drawingCanvas" width="700" height="840" class="w-full h-full block cursor-crosshair"></canvas>
+          </div>
+
+          <!-- 실시간 작품 캡션 미리보기 카드 -->
+          <div class="w-full max-w-[560px] mt-4 bg-gradient-to-r from-amber-50/90 via-orange-50/80 to-rose-50/90 border-2 border-amber-200/80 rounded-2xl p-4 shadow-sm">
+            <div class="flex items-start justify-between gap-3">
+              <div class="space-y-1 w-full">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-extrabold px-2 py-0.5 rounded-md bg-amber-600 text-white">작품 카드 미리보기</span>
+                  <span id="previewName" class="text-sm sm:text-base font-black text-slate-800">인물 이름을 입력해 주세요</span>
+                </div>
+                <p id="previewIntent" class="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed break-keep">
+                  왼쪽 입력칸에 인물의 성격과 색상 표현 의도를 적으면 이곳과 저장 이미지 하단에 멋지게 들어갑니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 하단: 작품 완성 및 저장하기 버튼 -->
+          <div class="w-full max-w-[560px] mt-4">
+            <button type="button" id="saveArtworkBtn"
+              class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-orange-500 via-rose-500 to-amber-500 hover:from-orange-600 hover:via-rose-600 hover:to-amber-600 text-white font-black text-base sm:text-lg shadow-lg shadow-orange-500/20 hover:shadow-orange-500/35 active:scale-[0.99] transition-all flex items-center justify-center gap-2.5">
+              <span class="text-xl">📸</span>
+              <span>작품 완성 및 저장하기 (PNG 다운로드)</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- 확인 모달 (전체 지우기용 커스텀 모달) -->
+  <div id="confirmModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 border-2 border-rose-200 shadow-xl text-center animate-fade-in">
+      <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mx-auto mb-3">
+        🗑️
+      </div>
+      <h3 class="text-lg font-black text-slate-800 mb-1">그림을 모두 지울까요?</h3>
+      <p class="text-sm text-slate-600 mb-5">지금까지 색칠한 분장이 초기화되고 기본 얼굴 도안만 남습니다.</p>
+      <div class="grid grid-cols-2 gap-2.5">
+        <button type="button" id="cancelClearBtn"
+          class="py-2.5 px-4 rounded-xl font-bold text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+          취소
+        </button>
+        <button type="button" id="confirmClearBtn"
+          class="py-2.5 px-4 rounded-xl font-bold text-sm bg-rose-600 hover:bg-rose-700 text-white transition-colors">
+          전체 지우기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 저장 완료 토스트 알림 -->
+  <div id="toastNotice" class="fixed bottom-6 right-6 z-50 hidden items-center gap-2.5 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-xl text-sm font-bold">
+    <span>🎉</span>
+    <span id="toastMessage">작품 이미지가 저장되었습니다!</span>
+  </div>
+
+  <!-- 푸터 -->
+  <footer class="w-full py-4 px-4 text-center text-xs text-slate-500 font-medium">
+    초·중학교 미술 수업 교구 · 경극/변검 색채 상징을 활용한 인물 얼굴 분장 디지털 드로잉
+  </footer>
+
+  <script>
+    (function () {
+      // 주요 DOM 요소
+      const displayCanvas = document.getElementById('drawingCanvas');
+      const displayCtx = displayCanvas.getContext('2d');
+
+      // 오프스크린 레이어:
+      // 1) paintLayerCanvas: 사용자의 순수 브러시 스트로크만 저장 (지우개 시 가이드라인이 지워지지 않도록 분리)
+      const paintLayerCanvas = document.createElement('canvas');
+      paintLayerCanvas.width = displayCanvas.width;
+      paintLayerCanvas.height = displayCanvas.height;
+      const paintCtx = paintLayerCanvas.getContext('2d');
+
+      // 2) guideLayerCanvas: 경극/변검 얼굴 마스크 윤곽선, 눈, 코, 입 실루엣 가이드라인
+      const guideLayerCanvas = document.createElement('canvas');
+      guideLayerCanvas.width = displayCanvas.width;
+      guideLayerCanvas.height = displayCanvas.height;
+      const guideCtx = guideLayerCanvas.getContext('2d');
+
+      // 드로잉 상태 변수
+      let isDrawing = false;
+      let currentColor = '#E11D48';
+      let currentColorName = '빨강 (충성·용맹)';
+      let currentBrushSize = 18;
+      let isEraser = false;
+      let isSymmetry = false;
+      let isGuideOnTop = true;
+      let lastPoint = null;
+
+      // 실행 취소(Undo) 스택
+      const historyStack = [];
+      const MAX_HISTORY = 25;
+
+      // UI 요소 참조
+      const colorCards = document.querySelectorAll('.color-card');
+      const brushSizeSlider = document.getElementById('brushSizeSlider');
+      const brushSizeValue = document.getElementById('brushSizeValue');
+      const brushPreviewCircle = document.getElementById('brushPreviewCircle');
+      const statusColorDot = document.getElementById('statusColorDot');
+      const statusToolText = document.getElementById('statusToolText');
+      const undoBtn = document.getElementById('undoBtn');
+      const eraserBtn = document.getElementById('eraserBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const symmetryToggle = document.getElementById('symmetryToggle');
+      const guideOnTopToggle = document.getElementById('guideOnTopToggle');
+      const characterNameInput = document.getElementById('characterNameInput');
+      const expressionIntentInput = document.getElementById('expressionIntentInput');
+      const previewName = document.getElementById('previewName');
+      const previewIntent = document.getElementById('previewIntent');
+      const saveArtworkBtn = document.getElementById('saveArtworkBtn');
+      const exampleChips = document.querySelectorAll('.example-chip');
+
+      const confirmModal = document.getElementById('confirmModal');
+      const cancelClearBtn = document.getElementById('cancelClearBtn');
+      const confirmClearBtn = document.getElementById('confirmClearBtn');
+      const toastNotice = document.getElementById('toastNotice');
+      const toastMessage = document.getElementById('toastMessage');
+
+      /**
+       * 1. 경극/변검 마스크 얼굴 가이드 도안 그리기 (guideLayerCanvas)
+       * 중앙에 큼직한 얼굴형 마스크 윤곽, 귀, 눈썹/눈, 코, 입, 경극 특유의 보조 점선 가이드를 배치합니다.
+       */
+      function drawMaskGuide(ctx, isUnderlay = false) {
+        const w = guideLayerCanvas.width;
+        const h = guideLayerCanvas.height;
+        const cx = w / 2;
+        const cy = h / 2 - 10;
+
+        ctx.clearRect(0, 0, w, h);
+        ctx.save();
+
+        // 외곽 장식 프레임 (은은한 전통 창살 느낌 모서리)
+        ctx.strokeStyle = '#E5D5C5';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(24, 24, w - 48, h - 48);
+
+        // 중앙 대칭 보조선 (매우 연한 점선)
+        ctx.save();
+        ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(cx, 65);
+        ctx.lineTo(cx, h - 65);
+        ctx.moveTo(95, cy - 35);
+        ctx.lineTo(w - 95, cy - 35);
+        ctx.stroke();
+        ctx.restore();
+
+        // 양쪽 귀 실루엣
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        // 왼쪽 귀
+        ctx.beginPath();
+        ctx.moveTo(cx - 212, cy - 55);
+        ctx.bezierCurveTo(cx - 258, cy - 75, cx - 262, cy + 45, cx - 208, cy + 75);
+        ctx.stroke();
+        // 왼쪽 귀 안쪽 선
+        ctx.save();
+        ctx.lineWidth = 2.2;
+        ctx.strokeStyle = '#64748B';
+        ctx.beginPath();
+        ctx.moveTo(cx - 220, cy - 30);
+        ctx.bezierCurveTo(cx - 242, cy - 35, cx - 242, cy + 25, cx - 216, cy + 45);
+        ctx.stroke();
+        ctx.restore();
+
+        // 오른쪽 귀
+        ctx.beginPath();
+        ctx.moveTo(cx + 212, cy - 55);
+        ctx.bezierCurveTo(cx + 258, cy - 75, cx + 262, cy + 45, cx + 208, cy + 75);
+        ctx.stroke();
+        // 오른쪽 귀 안쪽 선
+        ctx.save();
+        ctx.lineWidth = 2.2;
+        ctx.strokeStyle = '#64748B';
+        ctx.beginPath();
+        ctx.moveTo(cx + 220, cy - 30);
+        ctx.bezierCurveTo(cx + 242, cy - 35, cx + 242, cy + 25, cx + 216, cy + 45);
+        ctx.stroke();
+        ctx.restore();
+
+        // 마스크 본체 윤곽 (계란형 경극 가면 실루엣)
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 285);
+        // 오른쪽 이마 -> 관자놀이 -> 볼 -> 턱
+        ctx.bezierCurveTo(cx + 145, cy - 285, cx + 222, cy - 185, cx + 214, cy - 45);
+        ctx.bezierCurveTo(cx + 206, cy + 115, cx + 135, cy + 245, cx, cy + 295);
+        // 왼쪽 턱 -> 볼 -> 관자놀이 -> 이마
+        ctx.bezierCurveTo(cx - 135, cy + 245, cx - 206, cy + 115, cx - 214, cy - 45);
+        ctx.bezierCurveTo(cx - 222, cy - 185, cx - 145, cy - 285, cx, cy - 285);
+        ctx.closePath();
+
+        if (isUnderlay) {
+          ctx.fillStyle = '#FFFDF9';
+          ctx.fill();
+        }
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#1E293B';
+        ctx.stroke();
+
+        // 가면 안쪽 연한 분장 구역 가이드라인 (이마 문양선, 볼 문양 보조선 - 점선)
+        ctx.save();
+        ctx.strokeStyle = 'rgba(100, 116, 139, 0.38)';
+        ctx.lineWidth = 1.8;
+        ctx.setLineDash([5, 5]);
+
+        // 이마 곡선 가이드
+        ctx.beginPath();
+        ctx.moveTo(cx - 155, cy - 135);
+        ctx.quadraticCurveTo(cx, cy - 85, cx + 155, cy - 135);
+        ctx.stroke();
+
+        // 눈 주변 경극 안와(눈 화장) 가이드
+        ctx.beginPath();
+        ctx.moveTo(cx - 25, cy - 55);
+        ctx.bezierCurveTo(cx - 75, cy - 115, cx - 165, cy - 105, cx - 185, cy - 35);
+        ctx.bezierCurveTo(cx - 170, cy + 25, cx - 80, cy + 20, cx - 25, cy - 20);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(cx + 25, cy - 55);
+        ctx.bezierCurveTo(cx + 75, cy - 115, cx + 165, cy - 105, cx + 185, cy - 35);
+        ctx.bezierCurveTo(cx + 170, cy + 25, cx + 80, cy + 20, cx + 25, cy - 20);
+        ctx.stroke();
+
+        // 팔자/볼 분장 흐름 가이드
+        ctx.beginPath();
+        ctx.moveTo(cx - 55, cy + 65);
+        ctx.quadraticCurveTo(cx - 140, cy + 100, cx - 135, cy + 195);
+        ctx.moveTo(cx + 55, cy + 65);
+        ctx.quadraticCurveTo(cx + 140, cy + 100, cx + 135, cy + 195);
+        ctx.stroke();
+        ctx.restore();
+
+        // 눈썹 실루엣 (힘찬 아치형 가이드)
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 3.5;
+        // 왼쪽 눈썹
+        ctx.beginPath();
+        ctx.moveTo(cx - 38, cy - 82);
+        ctx.quadraticCurveTo(cx - 105, cy - 132, cx - 168, cy - 92);
+        ctx.stroke();
+        // 오른쪽 눈썹
+        ctx.beginPath();
+        ctx.moveTo(cx + 38, cy - 82);
+        ctx.quadraticCurveTo(cx + 105, cy - 132, cx + 168, cy - 92);
+        ctx.stroke();
+
+        // 눈 실루엣 (양쪽 눈매와 눈동자)
+        [-1, 1].forEach((dir) => {
+          const ex = cx + dir * 98;
+          const ey = cy - 42;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(cx + dir * 42, ey + 6);
+          ctx.quadraticCurveTo(ex, ey - 32, cx + dir * 156, ey - 10);
+          ctx.quadraticCurveTo(ex, ey + 26, cx + dir * 42, ey + 6);
+          ctx.closePath();
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+          ctx.fill();
+          ctx.lineWidth = 3.5;
+          ctx.strokeStyle = '#1E293B';
+          ctx.stroke();
+
+          // 눈동자
+          ctx.beginPath();
+          ctx.arc(ex, ey - 2, 13, 0, Math.PI * 2);
+          ctx.fillStyle = '#1E293B';
+          ctx.fill();
+
+          // 눈동자 하이라이트
+          ctx.beginPath();
+          ctx.arc(ex - dir * 4, ey - 6, 4, 0, Math.PI * 2);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fill();
+          ctx.restore();
+        });
+
+        // 코 실루엣 (콧대와 콧볼)
+        ctx.strokeStyle = '#1E293B';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.moveTo(cx - 16, cy - 35);
+        ctx.quadraticCurveTo(cx - 22, cy + 35, cx - 42, cy + 62);
+        ctx.quadraticCurveTo(cx - 22, cy + 82, cx, cy + 76);
+        ctx.quadraticCurveTo(cx + 22, cy + 82, cx + 42, cy + 62);
+        ctx.quadraticCurveTo(cx + 22, cy + 35, cx + 16, cy - 35);
+        ctx.stroke();
+
+        // 콧구멍 포인트
+        ctx.fillStyle = '#334155';
+        ctx.beginPath();
+        ctx.ellipse(cx - 18, cy + 67, 7, 4, Math.PI / 7, 0, Math.PI * 2);
+        ctx.ellipse(cx + 18, cy + 67, 7, 4, -Math.PI / 7, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 입 실루엣 (입술 윤곽선)
+        const my = cy + 148;
+        ctx.beginPath();
+        // 윗입술 산
+        ctx.moveTo(cx - 72, my);
+        ctx.quadraticCurveTo(cx - 35, my - 24, cx, my - 12);
+        ctx.quadraticCurveTo(cx + 35, my - 24, cx + 72, my);
+        // 아랫입술
+        ctx.quadraticCurveTo(cx + 38, my + 34, cx, my + 34);
+        ctx.quadraticCurveTo(cx - 38, my + 34, cx - 72, my);
+        ctx.closePath();
+        ctx.lineWidth = 3.5;
+        ctx.strokeStyle = '#1E293B';
+        ctx.stroke();
+
+        // 입 중앙선
+        ctx.beginPath();
+        ctx.moveTo(cx - 70, my);
+        ctx.quadraticCurveTo(cx, my + 8, cx + 70, my);
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      /**
+       * 2. 화면 캔버스 합성 렌더링 (배경 + 사용자 채색 레이어 + 가이드 레이어)
+       */
+      function renderCompositeCanvas() {
+        const w = displayCanvas.width;
+        const h = displayCanvas.height;
+
+        displayCtx.clearRect(0, 0, w, h);
+
+        // 1) 따뜻한 한지/화선지 느낌 배경색
+        displayCtx.fillStyle = '#FDFBF7';
+        displayCtx.fillRect(0, 0, w, h);
+
+        // 마스크 내부 기본 바탕을 흰색에 가깝게 칠해 하얀색 물감이나 채색이 잘 보이도록 설정
+        drawMaskBaseFill(displayCtx);
+
+        if (isGuideOnTop) {
+          // 사용자가 색칠한 레이어 먼저, 그 위에 가이드 실루엣 표시
+          displayCtx.drawImage(paintLayerCanvas, 0, 0);
+          displayCtx.drawImage(guideLayerCanvas, 0, 0);
+        } else {
+          // 가이드 실루엣 위에 사용자의 물감이 덮이도록 표시
+          displayCtx.drawImage(guideLayerCanvas, 0, 0);
+          displayCtx.drawImage(paintLayerCanvas, 0, 0);
+        }
+      }
+
+      function drawMaskBaseFill(ctx) {
+        const w = displayCanvas.width;
+        const h = displayCanvas.height;
+        const cx = w / 2;
+        const cy = h / 2 - 10;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 285);
+        ctx.bezierCurveTo(cx + 145, cy - 285, cx + 222, cy - 185, cx + 214, cy - 45);
+        ctx.bezierCurveTo(cx + 206, cy + 115, cx + 135, cy + 245, cx, cy + 295);
+        ctx.bezierCurveTo(cx - 135, cy + 245, cx - 206, cy + 115, cx - 214, cy - 45);
+        ctx.bezierCurveTo(cx - 222, cy - 185, cx - 145, cy - 285, cx, cy - 285);
+        ctx.closePath();
+        ctx.fillStyle = '#F8F4EC'; // 하양(#FFFFFF) 브러시도 뚜렷이 구분되도록 은은한 미색 바탕 적용
+        ctx.fill();
+        ctx.restore();
+      }
+
+      /**
+       * 3. 히스토리 저장 및 실행 취소(Undo)
+       */
+      function saveHistoryState() {
+        if (historyStack.length >= MAX_HISTORY) {
+          historyStack.shift();
+        }
+        historyStack.push(paintCtx.getImageData(0, 0, paintLayerCanvas.width, paintLayerCanvas.height));
+      }
+
+      function handleUndo() {
+        if (historyStack.length === 0) {
+          showToast('더 이상 되돌릴 이전 그림이 없어요.');
+          return;
+        }
+        const previousData = historyStack.pop();
+        paintCtx.putImageData(previousData, 0, 0);
+        renderCompositeCanvas();
+      }
+
+      /**
+       * 4. 마우스 / 터치 좌표 계산 및 드로잉 핸들러
+       */
+      function getCanvasCoordinates(evt) {
+        const rect = displayCanvas.getBoundingClientRect();
+        const scaleX = displayCanvas.width / rect.width;
+        const scaleY = displayCanvas.height / rect.height;
+
+        let clientX, clientY;
+        if (evt.touches && evt.touches.length > 0) {
+          clientX = evt.touches[0].clientX;
+          clientY = evt.touches[0].clientY;
+        } else if (evt.changedTouches && evt.changedTouches.length > 0) {
+          clientX = evt.changedTouches[0].clientX;
+          clientY = evt.changedTouches[0].clientY;
+        } else {
+          clientX = evt.clientX;
+          clientY = evt.clientY;
+        }
+
+        return {
+          x: (clientX - rect.left) * scaleX,
+          y: (clientY - rect.top) * scaleY
+        };
+      }
+
+      function drawStrokeSegment(fromPt, toPt) {
+        paintCtx.save();
+        paintCtx.lineCap = 'round';
+        paintCtx.lineJoin = 'round';
+        paintCtx.lineWidth = currentBrushSize;
+
+        if (isEraser) {
+          paintCtx.globalCompositeOperation = 'destination-out';
+          paintCtx.strokeStyle = 'rgba(0,0,0,1)';
+        } else {
+          paintCtx.globalCompositeOperation = 'source-over';
+          paintCtx.strokeStyle = currentColor;
+        }
+
+        // 기본 선 그리기
+        paintCtx.beginPath();
+        paintCtx.moveTo(fromPt.x, fromPt.y);
+        paintCtx.lineTo(toPt.x, toPt.y);
+        paintCtx.stroke();
+
+        // 좌우 대칭 모드가 켜져 있으면 반대편도 동시에 그리기
+        if (isSymmetry) {
+          const centerX = paintLayerCanvas.width / 2;
+          const mirrorFromX = centerX * 2 - fromPt.x;
+          const mirrorToX = centerX * 2 - toPt.x;
+
+          paintCtx.beginPath();
+          paintCtx.moveTo(mirrorFromX, fromPt.y);
+          paintCtx.lineTo(mirrorToX, toPt.y);
+          paintCtx.stroke();
+        }
+
+        paintCtx.restore();
+        renderCompositeCanvas();
+      }
+
+      function startDrawing(evt) {
+        if (evt.cancelable) evt.preventDefault();
+        saveHistoryState();
+        isDrawing = true;
+        const pt = getCanvasCoordinates(evt);
+        lastPoint = pt;
+        // 클릭만 했을 때도 점이 찍히도록 처리
+        drawStrokeSegment(pt, { x: pt.x + 0.1, y: pt.y + 0.1 });
+      }
+
+      function moveDrawing(evt) {
+        if (!isDrawing) return;
+        if (evt.cancelable) evt.preventDefault();
+        const pt = getCanvasCoordinates(evt);
+        drawStrokeSegment(lastPoint, pt);
+        lastPoint = pt;
+      }
+
+      function stopDrawing(evt) {
+        if (!isDrawing) return;
+        if (evt && evt.cancelable) evt.preventDefault();
+        isDrawing = false;
+        lastPoint = null;
+      }
+
+      // 포인터/마우스/터치 이벤트 바인딩
+      displayCanvas.addEventListener('mousedown', startDrawing);
+      displayCanvas.addEventListener('mousemove', moveDrawing);
+      window.addEventListener('mouseup', stopDrawing);
+
+      displayCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+      displayCanvas.addEventListener('touchmove', moveDrawing, { passive: false });
+      window.addEventListener('touchend', stopDrawing, { passive: false });
+      window.addEventListener('touchcancel', stopDrawing, { passive: false });
+
+      /**
+       * 5. 색상 카드 선택 및 도구 컨트롤
+       */
+      function updateToolStatusUI() {
+        brushSizeValue.textContent = `${currentBrushSize} px`;
+        const previewDiameter = Math.max(6, Math.min(32, currentBrushSize));
+        brushPreviewCircle.style.width = `${previewDiameter}px`;
+        brushPreviewCircle.style.height = `${previewDiameter}px`;
+
+        if (isEraser) {
+          statusColorDot.style.backgroundColor = '#E0F2FE';
+          statusToolText.textContent = '지우개 모드 사용 중';
+          brushPreviewCircle.style.backgroundColor = '#E0F2FE';
+          eraserBtn.classList.add('ring-2', 'ring-sky-500', 'bg-sky-100');
+        } else {
+          statusColorDot.style.backgroundColor = currentColor;
+          statusToolText.textContent = `${currentColorName} 브러시`;
+          brushPreviewCircle.style.backgroundColor = currentColor;
+          eraserBtn.classList.remove('ring-2', 'ring-sky-500', 'bg-sky-100');
+        }
+      }
+
+      colorCards.forEach((card) => {
+        card.addEventListener('click', () => {
+          isEraser = false;
+          currentColor = card.getAttribute('data-color');
+          currentColorName = card.getAttribute('data-name');
+
+          // 모든 카드 선택 스타일 초기화
+          colorCards.forEach((c) => {
+            c.classList.remove('color-card-active');
+            const badge = c.querySelector('.select-badge');
+            if (badge) {
+              badge.textContent = '브러시 선택';
+              badge.className = 'select-badge text-xs font-bold px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-300 shrink-0';
+            }
+          });
+
+          // 현재 선택된 카드 강조
+          card.classList.add('color-card-active');
+          const activeBadge = card.querySelector('.select-badge');
+          if (activeBadge) {
+            activeBadge.textContent = '선택됨 ✓';
+            activeBadge.className = 'select-badge text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-900 text-white shadow-sm shrink-0';
+          }
+
+          updateToolStatusUI();
+        });
+      });
+
+      brushSizeSlider.addEventListener('input', (e) => {
+        currentBrushSize = parseInt(e.target.value, 10);
+        updateToolStatusUI();
+      });
+
+      eraserBtn.addEventListener('click', () => {
+        isEraser = !isEraser;
+        if (isEraser) {
+          colorCards.forEach((c) => c.classList.remove('color-card-active'));
+        }
+        updateToolStatusUI();
+      });
+
+      undoBtn.addEventListener('click', handleUndo);
+
+      symmetryToggle.addEventListener('change', (e) => {
+        isSymmetry = e.target.checked;
+        showToast(isSymmetry ? '🦋 좌우 대칭 그리기가 켜졌습니다!' : '좌우 대칭 그리기가 꺼졌습니다.');
+      });
+
+      guideOnTopToggle.addEventListener('change', (e) => {
+        isGuideOnTop = e.target.checked;
+        renderCompositeCanvas();
+      });
+
+      // 전체 지우기 모달 열기/닫기
+      clearBtn.addEventListener('click', () => {
+        confirmModal.classList.remove('hidden');
+        confirmModal.classList.add('flex');
+      });
+
+      cancelClearBtn.addEventListener('click', () => {
+        confirmModal.classList.add('hidden');
+        confirmModal.classList.remove('flex');
+      });
+
+      confirmClearBtn.addEventListener('click', () => {
+        saveHistoryState();
+        paintCtx.clearRect(0, 0, paintLayerCanvas.width, paintLayerCanvas.height);
+        renderCompositeCanvas();
+        confirmModal.classList.add('hidden');
+        confirmModal.classList.remove('flex');
+        showToast('✨ 캔버스가 깨끗하게 초기화되었습니다.');
+      });
+
+      /**
+       * 6. 인물 이름 & 표현 의도 실시간 미리보기 연동
+       */
+      function updatePreviewCard() {
+        const nameVal = characterNameInput.value.trim();
+        const intentVal = expressionIntentInput.value.trim();
+
+        previewName.textContent = nameVal ? `인물: ${nameVal}` : '인물 이름을 입력해 주세요';
+        previewIntent.textContent = intentVal
+          ? intentVal
+          : '왼쪽 입력칸에 인물의 성격과 색상 표현 의도를 적으면 이곳과 저장 이미지 하단에 멋지게 들어갑니다.';
+      }
+
+      characterNameInput.addEventListener('input', updatePreviewCard);
+      expressionIntentInput.addEventListener('input', updatePreviewCard);
+
+      exampleChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          characterNameInput.value = chip.getAttribute('data-name') || '';
+          expressionIntentInput.value = chip.getAttribute('data-intent') || '';
+          updatePreviewCard();
+          showToast('💡 예시 문구가 입력되었어요! 자유롭게 수정해 보세요.');
+        });
+      });
+
+      /**
+       * 7. 작품 완성 및 저장하기 (인물 이름 + 표현 의도를 하단에 깔끔하게 포함한 PNG 생성)
+       */
+      function wrapKoreanText(ctx, text, maxWidth) {
+        const words = text.split('');
+        const lines = [];
+        let currentLine = '';
+
+        for (let i = 0; i < words.length; i++) {
+          const char = words[i];
+          if (char === '\n') {
+            lines.push(currentLine);
+            currentLine = '';
+            continue;
+          }
+          const testLine = currentLine + char;
+          const metrics = ctx.measureText(testLine);
+          if (metrics.width > maxWidth && currentLine.length > 0) {
+            lines.push(currentLine);
+            currentLine = char;
+          } else {
+            currentLine = testLine;
+          }
+        }
+        if (currentLine) {
+          lines.push(currentLine);
+        }
+        return lines;
+      }
+
+      function exportArtworkAsPNG() {
+        const charName = characterNameInput.value.trim() || '작자 미상 인물';
+        const charIntent = expressionIntentInput.value.trim() || '경극/변검의 색채 상징을 활용하여 인물의 개성과 성격을 표현한 작품입니다.';
+
+        const artW = displayCanvas.width;   // 700
+        const artH = displayCanvas.height;  // 840
+        const footerH = 230;
+        const totalW = artW;
+        const totalH = artH + footerH;
+
+        const exportCanvas = document.createElement('canvas');
+        exportCanvas.width = totalW;
+        exportCanvas.height = totalH;
+        const exCtx = exportCanvas.getContext('2d');
+
+        // 1) 상단 그림 영역 복사
+        renderCompositeCanvas();
+        exCtx.drawImage(displayCanvas, 0, 0);
+
+        // 상단 미니 타이틀 배지
+        exCtx.save();
+        exCtx.fillStyle = 'rgba(255, 248, 241, 0.92)';
+        exCtx.strokeStyle = '#FCD34D';
+        exCtx.lineWidth = 2;
+        exCtx.beginPath();
+        exCtx.roundRect(42, 36, totalW - 84, 44, 14);
+        exCtx.fill();
+        exCtx.stroke();
+
+        exCtx.fillStyle = '#9A3412';
+        exCtx.font = 'bold 17px "Noto Sans KR", sans-serif';
+        exCtx.textAlign = 'center';
+        exCtx.textBaseline = 'middle';
+        exCtx.fillText('🎭 역사 속 인물 및 주변 인물 얼굴 분장 디지털 드로잉', totalW / 2, 58);
+        exCtx.restore();
+
+        // 2) 하단 작품 설명 카드 영역 배경
+        exCtx.save();
+        exCtx.fillStyle = '#FFF8F1';
+        exCtx.fillRect(0, artH, totalW, footerH);
+
+        // 카드 박스
+        const cardX = 24;
+        const cardY = artH + 10;
+        const cardW = totalW - 48;
+        const cardH = footerH - 32;
+
+        exCtx.fillStyle = '#FFFFFF';
+        exCtx.strokeStyle = '#F59E0B';
+        exCtx.lineWidth = 3;
+        exCtx.beginPath();
+        exCtx.roundRect(cardX, cardY, cardW, cardH, 20);
+        exCtx.fill();
+        exCtx.stroke();
+
+        // 상단 포인트 바
+        exCtx.fillStyle = '#FEF3C7';
+        exCtx.beginPath();
+        exCtx.roundRect(cardX + 16, cardY + 16, cardW - 32, 46, 12);
+        exCtx.fill();
+
+        // 인물 이름 표시
+        exCtx.fillStyle = '#EA580C';
+        exCtx.font = '900 18px "Noto Sans KR", sans-serif';
+        exCtx.textAlign = 'left';
+        exCtx.textBaseline = 'middle';
+        exCtx.fillText('👤 표현 인물', cardX + 32, cardY + 39);
+
+        exCtx.fillStyle = '#1E293B';
+        exCtx.font = 'bold 20px "Noto Sans KR", sans-serif';
+        exCtx.fillText(charName, cardX + 150, cardY + 39);
+
+        // 표현 의도 라벨 및 본문 줄바꿈 출력
+        exCtx.fillStyle = '#4F46E5';
+        exCtx.font = 'bold 16px "Noto Sans KR", sans-serif';
+        exCtx.fillText('📝 표현 의도', cardX + 32, cardY + 86);
+
+        exCtx.fillStyle = '#334155';
+        exCtx.font = '500 16px "Noto Sans KR", sans-serif';
+        const lines = wrapKoreanText(exCtx, charIntent, cardW - 64);
+        const maxLines = 3;
+        for (let i = 0; i < Math.min(lines.length, maxLines); i++) {
+          let lineText = lines[i];
+          if (i === maxLines - 1 && lines.length > maxLines) {
+            lineText = lineText.slice(0, -1) + '…';
+          }
+          exCtx.fillText(lineText, cardX + 32, cardY + 116 + i * 26);
+        }
+
+        exCtx.restore();
+
+        // PNG 다운로드 트리거
+        const safeFileName = charName.replace(/[\\/:*?"<>|]/g, '_');
+        const dataUrl = exportCanvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = `경극분장드로잉_${safeFileName}.png`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showToast(`📸 '${charName}' 작품 이미지가 PNG로 저장되었습니다!`);
+      }
+
+      saveArtworkBtn.addEventListener('click', exportArtworkAsPNG);
+
+      // 토스트 알림 헬퍼
+      let toastTimer = null;
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toastNotice.classList.remove('hidden');
+        toastNotice.classList.add('flex');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastNotice.classList.add('hidden');
+          toastNotice.classList.remove('flex');
+        }, 2800);
+      }
+
+      // 초기 실행
+      drawMaskGuide(guideCtx, false);
+      renderCompositeCanvas();
+      updateToolStatusUI();
+    })();
+  </script>
+</body>
+</html>
